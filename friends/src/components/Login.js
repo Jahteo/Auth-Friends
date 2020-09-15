@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom"
 
 export default function Login () {
   const [credentials, setCredentials] = useState({
@@ -6,6 +8,7 @@ export default function Login () {
     password: ""
   })
   const [error, setError] = useState("")
+  const history = useHistory();
 
   const handleChange = (e) => {
     setCredentials({
@@ -18,6 +21,18 @@ export default function Login () {
   const login = (e) => {
     e.preventDefault();
     //AXIOS HERE
+    axiosWithAuth()
+      .post("/api/login", credentials)
+      .then(res => {
+        console.log("login Posted!!!", res.data.payload);
+        localStorage.setItem("token", res.data.payload);
+        history.push("/friends");
+
+      })
+      .catch(err => {
+        console.log(err.response.data.error)
+        setError(err.response.data.error)
+      })
   }
 
   return (
