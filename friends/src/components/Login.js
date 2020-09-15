@@ -8,6 +8,7 @@ export default function Login () {
     password: ""
   })
   const [error, setError] = useState("")
+  //TODO: ISLOADING SPINNER STATE.
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -20,7 +21,6 @@ export default function Login () {
 
   const login = (e) => {
     e.preventDefault();
-    //AXIOS HERE
     axiosWithAuth()
       .post("/api/login", credentials)
       .then(res => {
