@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import AddFriend from "./AddFriend";
 
 export default function FriendsList () {
 
@@ -28,6 +28,7 @@ export default function FriendsList () {
 
   return (
     <div>FriendsList component says hi
+      <AddFriend setFriends={setFriends} />
       {friends.map(friend => {
         return (
           <div>
